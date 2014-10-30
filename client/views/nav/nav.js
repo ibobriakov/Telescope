@@ -26,6 +26,9 @@ Template[getTemplate('nav')].helpers({
   logo_url: function(){
     return getSetting('logoUrl');
   },
+  tagline: function() {
+    return getSetting('tagline');
+  },
   logo_top: function(){
     return Math.floor((70-getSetting('logoHeight'))/2);
   },  
