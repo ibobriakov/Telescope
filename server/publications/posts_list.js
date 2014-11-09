@@ -2,8 +2,18 @@
 
 Meteor.publish('postsList', function(terms) {
   if(canViewById(this.userId)){
-    var parameters = getPostsParameters(terms),
-        posts = Posts.find(parameters.find, parameters.options);
+    var parameters = getPostsParameters(terms);
+    if (this.userId) {
+      var user = Meteor.users.findOne({_id: this.userId})
+      if (user.showUnwatched &&  user.watched) {
+        parameters.find._id = { $nin: user.watched }
+      }
+    }
+    var posts = Posts.find(parameters.find, parameters.options);
+
+    // var parameters = getPostsParameters(terms), user = this.user();
+    // if (user) parameters.find._id = { $nin: user.watched };
+    // var posts = Posts.find(parameters.find, parameters.options);
 
     // console.log('//-------- Subscription Parameters:');
     // console.log(parameters.find);

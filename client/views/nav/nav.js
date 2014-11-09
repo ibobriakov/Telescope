@@ -43,6 +43,14 @@ Template[getTemplate('nav')].helpers({
   },
   requirePostsApproval: function(){
     return getSetting('requirePostsApproval');
+  },
+  showUnwatched: function(){
+    var user = Meteor.user();
+    if (user && user.showUnwatched) {
+      return 'checked'
+    } else {
+      return ''
+    }
   }
 });
 
@@ -70,6 +78,16 @@ Template[getTemplate('nav')].events({
       var $loginButtonsLogout = $('#login-buttons-logout');
       $loginButtonsLogout.before('<a href="/users/'+Meteor.user().slug+'" class="account-link button">View Profile</a>');
       $loginButtonsLogout.before('<a href="/account" class="account-link button">Edit Account</a>');
+    }
+  },
+  'change #showUnwatched': function(e,t){
+    var user = Meteor.user();
+    if (user) {
+      if (t.find('#showUnwatched').checked) {
+        Meteor.users.update({_id: user._id}, {$set:{showUnwatched: true}})
+      } else {
+        Meteor.users.update({_id: user._id}, {$set:{showUnwatched: false}})
+      }
     }
   }
 });

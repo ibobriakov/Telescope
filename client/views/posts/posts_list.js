@@ -23,3 +23,7 @@ Template[getTemplate('posts_list')].helpers({
 Template[getTemplate('posts_list')].created = function() {
   Session.set('listPopulatedAt', new Date());
 };
+
+Template[getTemplate('posts_list')].lastUpdate = function () {
+  return Session.get('lastUpdate');
+};

@@ -20,6 +20,7 @@
     </div>
     <div class="modules-group right-modules">
       <div class="inner">
+      {{> postWatched}}
       {{#each rightPostModules}}
         <div class="{{moduleClass}}">
           {{> UI.dynamic template=getTemplate data=..}}

@@ -29,6 +29,9 @@
 
     {{#if hasSecondaryNav}}
       <ul class="nav secondary-nav desktop-nav {{dropdownClass}} header-module desktop-only">
+        <li>Не показывать просмотренные
+          <input id="showUnwatched" type="checkbox" {{showUnwatched}}>
+        </li>
         {{#each secondaryNav}}
           <li>
             {{> UI.dynamic template=getTemplate}}
